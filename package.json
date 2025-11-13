@@ -10,7 +10,6 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/content": "3.6.1",
     "@nuxt/eslint": "1.4.1",
     "@nuxt/fonts": "0.11.4",
     "@nuxt/icon": "1.14.0",
@@ -21,7 +20,6 @@
     "@nuxtjs/supabase": "1.5.2",
     "@pinia/nuxt": "0.11.1",
     "@unhead/vue": "^2.0.11",
-    "better-sqlite3": "^12.1.0",
     "eslint": "^9.29.0",
     "nuxt": "^3.17.5",
     "nuxt-auth-utils": "0.5.20",
