@@ -4,13 +4,11 @@ import { ref, onMounted } from 'vue'
 const config = useRuntimeConfig()
 
 const mapsUrl: string = 'https://www.google.com/maps/place/YPF/@-34.9261808,-58.3831004,15z/data=!4m8!3m7!1s0x95bd2b872ee85c0b:0xbb5b94433ba3c833!8m2!3d-34.9238323!4d-58.3809096!9m1!1b1!16s%2Fg%2F11h75ktn1g?entry=ttu&g_ep=EgoyMDI1MTEwOS4wIKXMDSoASAFQAw%3D%3D'
-const placeId: string = 'ChIJM0fnz_Dh0pURBz6K7vlB4Xo' // opcional
 
 const reviews = ref<any[]>([])
 const err = ref<string | null>(null)
 const loading = ref<boolean>(false)
 
-// helper para fetch con timeout
 async function fetchWithTimeout(url: string, options: RequestInit = {}, timeoutMs = 10000) {
   const controller = new AbortController()
   const id = setTimeout(() => controller.abort(), timeoutMs)
@@ -28,18 +26,16 @@ async function fetchReviews(): Promise<void> {
   err.value = null
   loading.value = true
   try {
-    const bodyPayload = { mapsUrl } // o { placeId }
+    const bodyPayload = { mapsUrl }
 
     const res = await fetchWithTimeout("http://127.0.0.1:8000/contact/reviews", {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
-        // si tu endpoint requiere auth: 'Authorization': `Bearer ${token}`
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(bodyPayload)
-    }, 10000)
+    }, 8000)
 
-    // manejo de errores HTTP
     if (!res.ok) {
       const txt = await res.text().catch(() => '')
       let parsed: any = null
@@ -48,7 +44,6 @@ async function fetchReviews(): Promise<void> {
       return
     }
 
-    // parseo normal
     const data = await res.json()
     if (data.error) {
       err.value = data.error + (data.detail ? `: ${data.detail}` : '')

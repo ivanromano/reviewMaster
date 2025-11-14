@@ -21,6 +21,16 @@ type Business = {
   created_at: string
 }
 
+type Comments = {
+  id: number
+  business_id: number
+  name: string
+  text: string
+  rating: number
+  date: string
+}
+
+
 type SingUpError = {
   name: string;
   message: string;
