@@ -145,11 +145,12 @@
 
 <template>
 index
-    <NuxtPage/>
-
+    <NuxtPage/> 
 </template>
 
 <script setup lang="ts">
+
+
 interface Comment {
   id: number
   name: string
@@ -212,7 +213,7 @@ const mockComments: Comment[] = [
   }
 ]
 
-onMounted(() => {
+onMounted(async () => {
     // fetchBusiness().then(() => {
     //   console.log("terminando fetch");
     // });
