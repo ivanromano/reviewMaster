@@ -1,9 +1,9 @@
 <template>
-    <div class="bg-white rounded-lg shadow-lg shadow-cyan-100 p-6">
+    <div class="bg-white md:rounded-lg shadow-lg shadow-cyan-100 p-6">
     <h3 class="text-lg font-semibold text-gray-900 mb-4">
         Lo que dicen nuestros clientes:
     </h3>
-    <div class="space-y-4">
+    <div class="md:space-y-4">
         <div
         v-for="comment in reviews"
         :key="comment.id"

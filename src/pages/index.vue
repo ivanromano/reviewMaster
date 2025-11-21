@@ -20,8 +20,8 @@
       </div> -->
 
       <!-- Contenido de la aplicación -->
-      <div class="max-w-4xl mx-auto px-4 py-8">
-        <div class="bg-white/80 backdrop-blur-sm rounded-lg shadow-lg p-8 mb-8">
+      <div class="md:max-w-4xl mx-auto  md:px-4 md:py-8">
+        <div class="bg-white/80 backdrop-blur-sm md:rounded-lg shadow-lg p-8 mb-8">
           <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-gray-900 mb-4 whitespace-pre-line">
               <div v-html="business?.gratitude_title">
