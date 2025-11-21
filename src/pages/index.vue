@@ -180,7 +180,7 @@ const fetchReviews = async () => {
       .eq('business_id', business.value?.id) 
       .order('display_order', { ascending: true })
 
-    console.log('review', data)
+    // console.log('review', data)
 
     if (error) throw error
 
@@ -196,7 +196,11 @@ const handleStarClick = async (rating: number) => {
   selectedRating.value = rating
   if (rating === 5) {
     if (business.value?.google_maps_url) {
+      // window.open(business.value.google_maps_url, '_blank')
+      console.log(business.value.google_maps_url)
+      
       window.open(business.value.google_maps_url, '_blank')
+
     }
   } else if (rating <= 4) {
     complaintModal.value.openModal(true)
