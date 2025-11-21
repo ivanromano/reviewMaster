@@ -10,7 +10,7 @@
     <div v-show="isModalOpen" id="modal_overlay" class="cursor-default fixed inset-0 bg-black/40 flex justify-center items-start md:items-center pt-10 md:pt-0 z-50">
       
       <!-- Modal -->
-      <div id="modal" :class="modalClasses" class="text-gray-100  relative w-[70%] md:w-[90%]  md:max-h-[90%] !block !visible rounded shadow-lg transition-transform duration-300 overflow-y-auto">
+      <div id="modal" :class="modalClasses" class="text-gray-100  relative w-[96%] md:w-[90%]  md:max-h-[90%] !block !visible rounded shadow-lg transition-transform duration-300 overflow-y-auto">
 
         <!-- Close button -->
         <button 

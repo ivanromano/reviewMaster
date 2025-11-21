@@ -1,6 +1,8 @@
+
+
 <template>
   <Sidebar :items="items">
-    <NuxtPage/>
+    <!-- <NuxtPage/> -->
   </Sidebar>
     
 </template>
