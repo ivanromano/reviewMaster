@@ -21,7 +21,7 @@
 
       <!-- Contenido de la aplicación -->
       <div class="md:max-w-4xl mx-auto  md:px-4 md:py-8">
-        <div class="bg-white/80 backdrop-blur-sm md:rounded-lg shadow-lg p-8 mb-8">
+        <div class="bg-white/40 backdrop-blur-sm md:rounded-lg shadow-lg p-8 mb-8">
           <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-gray-900 mb-4 whitespace-pre-line">
               <div v-html="business?.gratitude_title">
@@ -29,15 +29,15 @@
               </div>
               
             </h2>
-            <p class="text-lg text-gray-600 mb-2">
+            <p class="text-lg text-gray-700 mb-2">
               {{ business?.gratitude }}
             </p>
-            <p class="text-gray-500">
+            <p class="text-gray-700">
               ¿Cómo calificarías tu experiencia con nosotros?
             </p>
           </div>
 
-          <div class="bg-white rounded-lg shadow-lg shadow-cyan-100 p-8 mb-8">
+          <div class="bg-white rounded-lg shadow-md shadow-cyan-900/50 p-8 mb-8">
             <div class="text-center mb-6">
               <div class="flex justify-center space-x-2 mb-4">
                 <button
@@ -48,7 +48,7 @@
                 >
                   <Icon
                     :name="selectedRating && star <= selectedRating ? 'heroicons:star-20-solid' : 'heroicons:star-20-solid'"
-                    class="text-gray-300 hover:text-yellow-400"
+                    class="text-gray-500 hover:text-yellow-400"
                     :class="selectedRating && star <= selectedRating ? 'text-yellow-400' : 'text-gray-300 hover:text-yellow-400'"
                   />
                 </button>
