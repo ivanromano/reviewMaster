@@ -20,6 +20,8 @@ export default defineNuxtConfig({
     'v-gsap-nuxt',
   ],
 
+
+
   nitro: {
     modules: [nitroPublic()],
     static: true,

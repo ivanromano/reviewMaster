@@ -3,37 +3,18 @@
     class="min-h-screen bg-cover bg-fixed bg-no-repeat bg-bottom-right"
     :style="business?.background ? { backgroundImage: `linear-gradient(rgba(0, 20, 40,0.4), rgba(0, 20, 40,0.9)), url(${business.background})` } : {}"
   >
-    <!-- Contenido principal -->
     <div class="relative z-10">
-      <!-- <div class="pt-20 pb-10">
-        <div class="max-w-4xl mx-auto px-4">
-          <div class="text-center">
-            <img
-              v-if="business?.logo_url"
-              :src="business.logo_url"
-              :alt="`Logo ${business.name}`"
-              class="h-20 w-20 mx-auto mb-4 rounded-full object-cover border-2 border-white shadow-lg"
-            />
-            <h1 class="text-3xl font-bold mb-2 text-white">{{ business?.name }}</h1>
-          </div>
-        </div>
-      </div> -->
-
-      <!-- Contenido de la aplicación -->
-      <div class="md:max-w-4xl mx-auto  md:px-4 md:py-8">
+      <div class="md:max-w-4xl mx-auto md:px-4 md:py-8">
         <div class="bg-white/40 backdrop-blur-sm md:rounded-lg shadow-lg p-8 mb-8">
           <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-gray-900 mb-4 whitespace-pre-line">
-              <div v-html="business?.gratitude_title">
-
-              </div>
-              
+              <div v-html="business?.gratitude_title"></div>
             </h2>
             <p class="text-lg text-gray-700 mb-2">
               {{ business?.gratitude }}
             </p>
             <p class="text-gray-700">
-              ¿Cómo calificarías tu experiencia con nosotros?
+              {{ texts[0]["How_would_you_rate_your_experience_with_us?"] }}
             </p>
           </div>
 
@@ -56,20 +37,19 @@
               <p class="text-gray-600">
                 {{ selectedRating 
                   ? selectedRating === 5 
-                    ? '¡Perfecto! Te dirigimos a Google para tu reseña.'
-                    : 'Nos gustaría conocer más detalles sobre tu experiencia.'
-                  : 'Haz clic en las estrellas para calificar'
+                    ? texts[1]["We_will_direct_you_to_Google_for_your_review"]
+                    : texts[2]["We_would_like_to_know_more_details_about_your_experience"]
+                  : texts[3]["Click_on_the_stars_to_rate"]
                 }}
               </p>
             </div>
           </div>
         </div>
 
-
         <div v-if="selectedRating === 5" class="mt-6 text-center">
           <div class="bg-green-50 border border-green-200 rounded-lg p-6">
             <h3 class="text-lg font-semibold text-green-800 mb-2">
-              ¡Excelente! Tu reseña nos ayuda mucho
+              {{ texts[1]["We_will_direct_you_to_Google_for_your_review"] }}
             </h3>
             <p class="text-green-700 mb-4">
               Te estamos redirigiendo a Google Maps para que puedas dejar tu reseña de 5 estrellas.
@@ -81,43 +61,37 @@
             </div>
           </div>
         </div>
-        <IndexReviews :reviews="reviews" />
 
+        <IndexReviews :reviews="reviews" />
       </div>
 
-      
-      <!-- Footer -->
-      <footer class="mt-12 py-6 border-t bg-white/80 backdrop-blur-sm">
-        <div class="max-w-4xl mx-auto px-4 text-center text-sm text-gray-500">
-          <p>© 2025 ReviewMaster. Todos los derechos reservados. Código propietario protegido.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
 
     <ModalsModal 
       ref="complaintModal"
-      title="Ayúdanos a Mejorar" 
+      :title="texts[4]['Help_us_improve']" 
       :showSave="false"
       bg="bg-white"
     >
       <template #btn>
-        <button style="display: none">Abrir Quejas</button>
+        <button style="display: none">{{ texts[4]['Help_us_improve'] }}</button>
       </template>
 
       <template #body>
         <div class="text-gray-900">
           <div class="text-center mb-6">
             <h1 class="text-2xl font-bold text-gray-900 mb-2">
-              Ayúdanos a Mejorar
+              {{ texts[4]['Help_us_improve'] }}
             </h1>
             <p class="text-gray-600">
-              Tu opinión es muy importante para nosotros. Cuéntanos cómo podemos hacer tu experiencia mejor.
+              {{ texts[5]['Your_opinion_is_very_important_to_us'] }}
             </p>
           </div>
 
           <div class="text-center p-4 bg-green-50 rounded-lg">
             <p class="text-green-800 mb-4">
-              Te redirigiremos a WhatsApp para que puedas contactarnos directamente.
+              {{ texts[6]['We_will_redirect_you_to_WhatsApp'] }}
             </p>
             <button
               @click="handleWhatsAppRedirect"
@@ -149,9 +123,39 @@ const selectedRating = ref<number | null>(null)
 const reviews = ref<Review[]>()
 const complaintModal = ref()
 
+const targetLang = ref()
+
+
+interface Text {
+  [key: string]: string;
+}
+
+const texts = ref<Text[]>([
+  {"How_would_you_rate_your_experience_with_us?": "¿Cómo calificarías tu experiencia con nosotros?"},
+  {"We_will_direct_you_to_Google_for_your_review": "¡Perfecto! Te dirigimos a Google para tu reseña"},
+  {"We_would_like_to_know_more_details_about_your_experience": "Nos gustaría conocer más detalles sobre tu experiencia."},
+  {"Click_on_the_stars_to_rate": "Haz clic en las estrellas para calificar"},
+  {"Help_us_improve": "Ayúdanos a Mejorar"},
+  {"Your_opinion_is_very_important_to_us": "Tu opinión es muy importante para nosotros. Cuéntanos cómo podemos hacer tu experiencia mejor."},
+  {"We_will_redirect_you_to_WhatsApp": "Te redirigiremos a WhatsApp para que puedas contactarnos directamente."},
+  {"Redirecting_to_Google_Maps": "Te estamos redirigiendo a Google Maps para que puedas dejar tu reseña de 5 estrellas."},
+  {"Contact_on_WhatsApp": "Contactar por WhatsApp"},
+  {"Excellent_your_review_helps_us_a_lot": "¡Excelente! Tu reseña nos ayuda mucho"}
+])
+
 onMounted(async () => {
   await fetchBusiness()
   await fetchReviews()
+
+  targetLang.value = navigator.language.split("-")[0]
+  
+  if (targetLang.value !== 'es') {
+    for (const text of texts.value) {
+      const key:string = Object.keys(text)[0]
+      text[key] = await tr(text[key])
+    }
+  }
+
 })
 
 const fetchBusiness = async () => {
@@ -165,6 +169,10 @@ const fetchBusiness = async () => {
     if (error) throw error
 
     business.value = data
+
+    business.value!.gratitude_title = await tr(business.value!.gratitude_title)
+    business.value!.gratitude = await tr(business.value!.gratitude)
+    
   } catch (error: any) {
     console.error('Error', error)
   } finally {
@@ -180,11 +188,13 @@ const fetchReviews = async () => {
       .eq('business_id', business.value?.id) 
       .order('display_order', { ascending: true })
 
-    // console.log('review', data)
-
     if (error) throw error
 
     reviews.value = data
+    reviews.value!.forEach(async (review) => {
+      review.text = await tr(review.text)
+    })
+
   } catch (error: any) {
     console.error('Error', error)
   } finally {
@@ -196,9 +206,6 @@ const handleStarClick = async (rating: number) => {
   selectedRating.value = rating
   if (rating === 5) {
     if (business.value?.google_maps_url) {
-      // window.open(business.value.google_maps_url, '_blank')
-      console.log(business.value.google_maps_url)
-      
       window.open(business.value.google_maps_url, '_blank')
 
     }
@@ -216,9 +223,3 @@ const handleWhatsAppRedirect = () => {
   complaintModal.value.openModal(false)
 }
 </script>
-
-<!-- 
-si te gusta ponele algo como cuando regreses siempre habra una mesa esperandote algo que haga sentir importante al cliente
-
-onele un titulo como, tu buena vibra se queda aqui gracias por visitarnos.  como encabezado las estrellas y los comentarios que sean como un relleno para inspiracion pero no es importante ponele algo del perfil como una foto detras para personalizar el negocio ... este es el perfil que optimize 
--->
