@@ -7,7 +7,7 @@
 <script setup>
 
 useHead({
-    titleTemplate: '%s - Volt',
+    titleTemplate: 'ReviewMaster - %s',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

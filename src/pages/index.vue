@@ -222,4 +222,12 @@ const handleWhatsAppRedirect = () => {
   window.open(whatsappUrl, '_blank')
   complaintModal.value.openModal(false)
 }
+
+useHead({
+  title: slug,
+  meta: [
+    { name: 'description', content: 'My amazing site.' },
+  ],
+})
+
 </script>
